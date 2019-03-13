@@ -9,21 +9,26 @@
  * 
  */
 
-#ifndef I_OBJECT_H
-#define I_OBJECT_H
+#ifndef OBJECT_H
+#define OBJECT_H
 
-class IObject
+struct Location
+{
+  int Xpos;
+  int Ypos;
+};
+
+class Object
 {
   public:
-
-    virtual ~IObject() {}
+    Object();
+    Object(Location l){};
+    ~Object();
 
     virtual void Draw() = 0;
   
-  private:
-
-    int *Xpos; //Position on X axis
-    int *Ypos; //Position on Y axis
+  protected:
+    Location l;  
 };
 
 #endif

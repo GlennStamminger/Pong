@@ -12,17 +12,18 @@
 #ifndef BOX_OBJECT_H
 #define BOX_OBJECT_H
 
-#include "IObject.h"
+#include "Object.h"
 
-class BoxObject : IObject
+#define HEIGHT (10)
+#define WIDTH  (5)
+
+class BoxObject : public Object
 {
   public:
+    BoxObject(Location l) : Object(l){}
+    ~BoxObject();
 
-  BoxObject(int Xpos, int Ypos, int height, int width);
-  
-  ~BoxObject();
-
-  void Draw(int Xpos, int Ypos, int height, int width);
+  void Draw();
 
 };
 
