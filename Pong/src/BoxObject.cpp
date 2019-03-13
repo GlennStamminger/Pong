@@ -11,12 +11,15 @@
 
 #include "BoxObject.h"
 
-BoxObject::BoxObject(Location l)
+BoxObject::BoxObject(Location Location, int height, int width)
+  : Object(location), height(height), width(width)
 {
  
 }
 
-void BoxObject::Draw()
+BoxObject::~BoxObject(){}
+
+void BoxObject::Draw(Adafruit_SH1106& display)
 {
-  
+  display.fillRect(this->location.Xpos, this->location.Ypos, this->height, this->width, WHITE);
 }

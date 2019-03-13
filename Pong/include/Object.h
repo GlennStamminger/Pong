@@ -12,23 +12,19 @@
 #ifndef OBJECT_H
 #define OBJECT_H
 
-struct Location
-{
-  int Xpos;
-  int Ypos;
-};
+#include "Location.h"
+#include "Adafruit_SH1106.h"
 
 class Object
 {
   public:
-    Object();
-    Object(Location l){};
+    Object(Location location);
     ~Object();
 
-    virtual void Draw() = 0;
+    virtual void Draw(Adafruit_SH1106& display) = 0;
   
   protected:
-    Location l;  
+    Location location;  
 };
 
 #endif

@@ -14,17 +14,17 @@
 
 #include "Object.h"
 
-#define HEIGHT (10)
-#define WIDTH  (5)
-
 class BoxObject : public Object
 {
   public:
-    BoxObject(Location l) : Object(l){}
+    BoxObject(Location location, int height, int width);
     ~BoxObject();
 
-  void Draw();
+    void Draw(Adafruit_SH1106& display);
 
+  private:
+    int height;
+    int width;
 };
 
 #endif
