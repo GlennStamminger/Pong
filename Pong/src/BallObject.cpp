@@ -21,5 +21,7 @@ BallObject::~BallObject(){}
 
 void BallObject::Draw(Adafruit_SH1106& display)
 {
+  display.clearDisplay();
   display.fillCircle(this->location.Xpos, this->location.Ypos, radius, WHITE);
+  display.display();
 }

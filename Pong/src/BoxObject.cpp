@@ -21,5 +21,8 @@ BoxObject::~BoxObject(){}
 
 void BoxObject::Draw(Adafruit_SH1106& display)
 {
+  //check of cleardisplay weg kan
+  display.clearDisplay();
   display.fillRect(this->location.Xpos, this->location.Ypos, this->height, this->width, WHITE);
+  display.display();
 }
