@@ -11,8 +11,8 @@
 
 #include "Object.h"
 
-Object::Object(Location location)
-  : location(location)
+Object::Object(Location location, Adafruit_SH1106& display)
+  : location(location), display(display)
 {
 
 }

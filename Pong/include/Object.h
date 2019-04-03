@@ -18,13 +18,14 @@
 class Object
 {
   public:
-    Object(Location location);
+    Object(Location location, Adafruit_SH1106& display);
     ~Object();
 
-    virtual void Draw(Adafruit_SH1106& display) = 0;
+    virtual void Draw() = 0;
   
   protected:
     Location location;  
+    Adafruit_SH1106& display;
 };
 
 #endif

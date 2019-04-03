@@ -11,17 +11,15 @@
 
 #include "BallObject.h"
 
-BallObject::BallObject(Location location, int radius)
-  : Object(location), radius(radius)
+BallObject::BallObject(Location location, Adafruit_SH1106& display, int radius)
+  : Object(location, display), radius(radius)
 {
 
 }
 
 BallObject::~BallObject(){}
 
-void BallObject::Draw(Adafruit_SH1106& display)
+void BallObject::Draw()
 {
-  display.clearDisplay();
-  display.fillCircle(this->location.Xpos, this->location.Ypos, radius, WHITE);
-  display.display();
+  this->display.fillCircle(this->location.Xpos, this->location.Ypos, radius, WHITE);
 }

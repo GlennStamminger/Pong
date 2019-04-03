@@ -17,10 +17,10 @@
 class BallObject : public Object
 {
   public:
-    BallObject(Location location, int radius);
+    BallObject(Location location, Adafruit_SH1106& display, int radius);
     ~BallObject();
 
-    void Draw(Adafruit_SH1106& display);
+    void Draw();
 
   private:
     int radius;
