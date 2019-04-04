@@ -13,9 +13,9 @@
 
 BoxObject::BoxObject(Location location, Adafruit_SH1106& display, int width, int height)
   : Object(Location, display), width(width), height(height)
-  {
+{
 
-  }
+}
 
 BoxObject::~BoxObject(){}
 

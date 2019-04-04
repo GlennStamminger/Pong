@@ -7,43 +7,46 @@
 #include "BoxObject.h"
 #include "Location.h"
 
+//Reset value for the oled display.
 #define OLED_RESET (4)
-#define LOGO16_GLCD_HEIGHT (16) 
-#define LOGO16_GLCD_WIDTH  (16) 
 
-//BUTTONPINS
+//Button pins.
 #define LEFTDOWNPIN (2)
 #define LEFTUPPIN (3)
 
 Adafruit_SH1106 display(OLED_RESET);
 
-//LOCATIONS
+//Object locations.
 Location leftBoxLocation = (Location){DEFAULT_BORDER_DISTANCE, DEFAULT_STARTING_POSITION};
 Location rightBoxLocation = (Location){display.width() - DEFAULT_BORDER_DISTANCE, DEFAULT_STARTING_POSITION};
 
-//BOXES
+//Box objects.
 BoxObject leftBox = BoxObject(leftBoxLocation, display, DEFAULT_BOX_WIDTH, DEFAULT_BOX_HEIGHT);
 BoxObject rightBox = BoxObject(rightBoxLocation, display, DEFAULT_BOX_WIDTH, DEFAULT_BOX_HEIGHT);
 
-//gooi een capacitor tussen de buttons smoothing capacitor/ceramic capacitor
+/*gooi een capacitor tussen de buttons
+een smoothing capacitor/ceramic capacitor*/
 
-//BOOLS
+//Box movement bools.
 bool leftDown = false;
 bool leftUp = false;
 bool rightDown = false;
 bool rightUp = false;
 
-//FUNCTIONS
+//Functions.
 void LeftMoveDown()
 {
+  //Check if down button for the left box is pressed.
   if(digitalRead(LEFTDOWNPIN) == HIGH)
   {
+    //Set the correlating bool to true and the opposite to false.
     leftDown = true;
     if(leftUp == true)
     {
       leftUp = false;
     }
   }
+  //If the button is not pressed set the correlating bool to false.
   else
   {
     leftDown = false;
@@ -52,14 +55,17 @@ void LeftMoveDown()
 
 void LeftMoveUp()
 {
+  //Check if the up button for the left box is pressed.
   if(digitalRead(LEFTUPPIN) == HIGH)
   {
+    //Set the correlating bool to true and the opposite to false.
     leftUp = true;
     if(leftDown = true)
     {
       leftDown = false;
     }
   }
+  //If the button is not pressed set the correlating bool to false.
   else
   {
     leftUp = false;
@@ -77,17 +83,21 @@ void RightMoveUp()
 }
 
 void setup() {
+  //Set pins and attach interrupt functions to them.
   pinMode(LEFTDOWNPIN, INPUT_PULLUP);
   pinMode(LEFTUPPIN, INPUT_PULLUP);
   attachInterrupt(digitalPinToInterrupt(LEFTDOWNPIN), &LeftMoveDown, CHANGE);
   attachInterrupt(digitalPinToInterrupt(LEFTUPPIN), &LeftMoveUp, CHANGE);
+  //Initiate and clear display.
   display.begin(SH1106_SWITCHCAPVCC, 0x3C);
   display.clearDisplay();
   display.display();
 }
 
 void loop() {
+  //Clear the old display.
   display.clearDisplay();
+  //Check for new movement input for the boxes.
   if(leftDown)
   {
     leftBox.MoveDown();
@@ -98,6 +108,7 @@ void loop() {
     leftBox.MoveUp();
     rightBox.MoveDown();
   }
+  //Redraw and display the boxes.
   leftBox.Draw();
   rightBox.Draw();
   display.display();
