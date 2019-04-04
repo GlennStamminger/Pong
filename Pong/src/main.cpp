@@ -7,9 +7,13 @@
 #include "BoxObject.h"
 #include "Location.h"
 
-#define OLED_RESET 4
-#define LOGO16_GLCD_HEIGHT 16 
-#define LOGO16_GLCD_WIDTH  16 
+#define OLED_RESET (4)
+#define LOGO16_GLCD_HEIGHT (16) 
+#define LOGO16_GLCD_WIDTH  (16) 
+
+//BUTTONPINS
+#define LEFTDOWNPIN (2)
+#define LEFTUPPIN (3)
 
 Adafruit_SH1106 display(OLED_RESET);
 
@@ -21,47 +25,62 @@ Location rightBoxLocation = (Location){display.width() - DEFAULT_BORDER_DISTANCE
 BoxObject leftBox = BoxObject(leftBoxLocation, display, DEFAULT_BOX_WIDTH, DEFAULT_BOX_HEIGHT);
 BoxObject rightBox = BoxObject(rightBoxLocation, display, DEFAULT_BOX_WIDTH, DEFAULT_BOX_HEIGHT);
 
-
-//BUTTONPINS
-const int leftDownPin = 2;
-const int leftUpPin = 3;
+//gooi een capacitor tussen de buttons smoothing capacitor/ceramic capacitor
 
 //BOOLS
-volatile bool leftDown = false;
-volatile bool leftUp = false;
-volatile bool rightDown = false;
-volatile bool rightUp = false;
+bool leftDown = false;
+bool leftUp = false;
+bool rightDown = false;
+bool rightUp = false;
 
 //FUNCTIONS
 void LeftMoveDown()
 {
-  leftUp = false;
-  leftDown = !leftDown;
+  if(digitalRead(LEFTDOWNPIN) == HIGH)
+  {
+    leftDown = true;
+    if(leftUp == true)
+    {
+      leftUp = false;
+    }
+  }
+  else
+  {
+    leftDown = false;
+  }
 }
 
 void LeftMoveUp()
 {
-  leftDown = false;
-  leftUp = !leftUp;
+  if(digitalRead(LEFTUPPIN) == HIGH)
+  {
+    leftUp = true;
+    if(leftDown = true)
+    {
+      leftDown = false;
+    }
+  }
+  else
+  {
+    leftUp = false;
+  }
 }
 
 void RightMoveDown()
 {
-  rightUp = false;
-  rightDown = !rightDown;
+  
 }
 
 void RightMoveUp()
 {
-  rightDown = false;
-  rightUp = !rightUp;
+  
 }
 
 void setup() {
-  pinMode(leftDownPin, INPUT_PULLUP);
-  pinMode(leftUpPin, INPUT_PULLUP);
-  attachInterrupt(digitalPinToInterrupt(leftDownPin), &LeftMoveDown, CHANGE);
-  attachInterrupt(digitalPinToInterrupt(leftUpPin), &LeftMoveUp, CHANGE);
+  pinMode(LEFTDOWNPIN, INPUT_PULLUP);
+  pinMode(LEFTUPPIN, INPUT_PULLUP);
+  attachInterrupt(digitalPinToInterrupt(LEFTDOWNPIN), &LeftMoveDown, CHANGE);
+  attachInterrupt(digitalPinToInterrupt(LEFTUPPIN), &LeftMoveUp, CHANGE);
   display.begin(SH1106_SWITCHCAPVCC, 0x3C);
   display.clearDisplay();
   display.display();
@@ -69,26 +88,16 @@ void setup() {
 
 void loop() {
   display.clearDisplay();
-  if(leftDown && leftUp)
-  {
-    leftDown = false;
-    leftUp = false;
-
-    rightDown = false;
-    rightUp = false;
-  }
-  else if(leftDown && !leftUp)
+  if(leftDown)
   {
     leftBox.MoveDown();
     rightBox.MoveUp();
   }
-  else if(!leftDown && leftUp)
+  else if(leftUp)
   {
     leftBox.MoveUp();
     rightBox.MoveDown();
   }
-  else
-  {}
   leftBox.Draw();
   rightBox.Draw();
   display.display();

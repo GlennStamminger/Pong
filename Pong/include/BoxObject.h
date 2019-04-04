@@ -14,10 +14,13 @@
 
 #include "Object.h"
 
+//remove dislay.width and display.height
+
 #define DEFAULT_BOX_WIDTH         (display.width()/32)
 #define DEFAULT_BOX_HEIGHT        (display.height()/4)
 #define DEFAULT_BORDER_DISTANCE   (display.width()/16)
 #define DEFAULT_STARTING_POSITION (((display.height()/2) - (DEFAULT_BOX_HEIGHT/2)))
+#define DEFAULT_STEP_SIZE         (1)
 
 class BoxObject : public Object
 {

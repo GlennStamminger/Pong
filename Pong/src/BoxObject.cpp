@@ -11,14 +11,8 @@
 
 #include "BoxObject.h"
 
-/*BoxObject::BoxObject(Location location, Adafruit_SH1106& display, int width, int height)
-  : Object(location), display(display), width(width), height(height)
-{
-
-}*/
-
 BoxObject::BoxObject(Location location, Adafruit_SH1106& display, int width, int height)
-  : Object(location, display), width(width), height(height)
+  : Object(Location, display), width(width), height(height)
   {
 
   }
@@ -34,7 +28,7 @@ void BoxObject::MoveUp()
 {
   if(this->location.Ypos > 0)
   {
-    this->location.Ypos -= 1;
+    this->location.Ypos -= DEFAULT_STEP_SIZE;
   }
 }
 
@@ -42,6 +36,6 @@ void BoxObject::MoveDown()
 {
   if((this->location.Ypos + this->height) < display.height())
   {
-    this->location.Ypos += 1;
+    this->location.Ypos += DEFAULT_STEP_SIZE;
   }
 }
