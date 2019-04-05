@@ -20,7 +20,7 @@
 #define DEFAULT_BOX_HEIGHT        (display.height()/4)
 #define DEFAULT_BORDER_DISTANCE   (display.width()/16)
 #define DEFAULT_STARTING_POSITION (((display.height()/2) - (DEFAULT_BOX_HEIGHT/2)))
-#define DEFAULT_STEP_SIZE         (1)
+#define DEFAULT_STEP_SIZE         (2)
 
 class BoxObject : public Object
 {

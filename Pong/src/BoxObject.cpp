@@ -11,11 +11,17 @@
 
 #include "BoxObject.h"
 
-BoxObject::BoxObject(Location location, Adafruit_SH1106& display, int width, int height)
-  : Object(Location, display), width(width), height(height)
+/*BoxObject::BoxObject(Location location, Adafruit_SH1106& display, int width, int height)
+  : Object(location), display(display), width(width), height(height)
 {
 
-}
+}*/
+
+BoxObject::BoxObject(Location location, Adafruit_SH1106& display, int width, int height)
+  : Object(location, display), width(width), height(height)
+  {
+
+  }
 
 BoxObject::~BoxObject(){}
 
