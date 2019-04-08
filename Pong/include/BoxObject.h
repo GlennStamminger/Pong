@@ -14,12 +14,12 @@
 
 #include "Object.h"
 
-//remove dislay.width and display.height
+//Default sizes based on 128x64 OLED display.
 
-#define DEFAULT_BOX_WIDTH         (display.width()/32)
-#define DEFAULT_BOX_HEIGHT        (display.height()/4)
-#define DEFAULT_BORDER_DISTANCE   (display.width()/16)
-#define DEFAULT_STARTING_POSITION (((display.height()/2) - (DEFAULT_BOX_HEIGHT/2)))
+#define DEFAULT_BOX_WIDTH         (4) //Width divided by 32.
+#define DEFAULT_BOX_HEIGHT        (16) //Height divided by 4.
+#define DEFAULT_BORDER_DISTANCE   (8) //Width divided 16.
+#define DEFAULT_STARTING_POSITION (32 - (DEFAULT_BOX_HEIGHT/2)) //Height divided by 2 - the DEFAULT_BOX_HEIGHT divided by 2
 #define DEFAULT_STEP_SIZE         (2)
 
 class BoxObject : public Object
