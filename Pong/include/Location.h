@@ -12,10 +12,18 @@
 #ifndef LOCATION_H
 #define LOCATION_H
 
-struct Location
+class Location
 {
-  int Xpos;
-  int Ypos;
+  public:
+    Location() = default;
+	  Location(int Xpos, int Ypos);
+	  Location operator+(const Location& velocity) const;
+	  Location& operator+=(const Location& velocity);
+	  Location operator-(const Location& velocity) const;
+	  Location& operator-=(const Location& velocity);
+  public:
+    int Xpos;
+    int Ypos;
 };
 
 #endif

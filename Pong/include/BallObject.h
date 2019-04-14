@@ -14,6 +14,9 @@
 
 #include "Object.h"
 
+#define BALL_RADIUS    (2)
+#define BALL_VELOCITY  (1)
+
 class BallObject : public Object
 {
   public:
@@ -21,9 +24,15 @@ class BallObject : public Object
     ~BallObject();
 
     void Draw();
+    void Move();
+    void ScreenBounce();
+    int DetectScreenEdgesX();
+    int DetectScreenEdgesY();
+
 
   private:
     int radius;
+    Location velocity;
 };
 
 #endif

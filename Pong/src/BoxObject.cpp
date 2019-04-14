@@ -28,7 +28,7 @@ void BoxObject::MoveUp()
 {
   if(this->location.Ypos > 0)
   {
-    this->location.Ypos -= DEFAULT_STEP_SIZE;
+    this->location.Ypos -= BOX_STEP_SIZE;
   }
 }
 
@@ -36,6 +36,6 @@ void BoxObject::MoveDown()
 {
   if((this->location.Ypos + this->height) < display.height())
   {
-    this->location.Ypos += DEFAULT_STEP_SIZE;
+    this->location.Ypos += BOX_STEP_SIZE;
   }
 }

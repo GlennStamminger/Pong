@@ -6,10 +6,13 @@
 #include <Arduino.h>
 #include <PinChangeInt.h>
 #include "BoxObject.h"
+#include "BallObject.h"
 #include "Location.h"
 
-//Reset value for the oled display.
+//Display pins.
 #define OLED_RESET (4)
+#define SCL (A5)
+#define SDA (A4)
 
 //Button pins.
 #define LEFTDOWNPIN (2)
@@ -20,12 +23,14 @@
 Adafruit_SH1106 display(OLED_RESET);
 
 //Object locations.
-Location leftBoxLocation = (Location){DEFAULT_BORDER_DISTANCE, DEFAULT_STARTING_POSITION};
-Location rightBoxLocation = (Location){display.width() - DEFAULT_BORDER_DISTANCE, DEFAULT_STARTING_POSITION};
+Location leftBoxLocation = (Location){BOX_BORDER_DISTANCE, BOX_STARTING_POSITION};
+Location rightBoxLocation = (Location){display.width() - BOX_BORDER_DISTANCE, BOX_STARTING_POSITION};
+Location ballLocation = (Location){display.width()/2, display.height()/2};
 
-//Box objects.
-BoxObject leftBox = BoxObject(leftBoxLocation, display, DEFAULT_BOX_WIDTH, DEFAULT_BOX_HEIGHT);
-BoxObject rightBox = BoxObject(rightBoxLocation, display, DEFAULT_BOX_WIDTH, DEFAULT_BOX_HEIGHT);
+//Objects.
+BoxObject leftBox = BoxObject(leftBoxLocation, display, BOX_BOX_WIDTH, BOX_BOX_HEIGHT);
+BoxObject rightBox = BoxObject(rightBoxLocation, display, BOX_BOX_WIDTH, BOX_BOX_HEIGHT);
+BallObject ball = BallObject(ballLocation, display, BALL_RADIUS);
 
 /*gooi een capacitor tussen de buttons
 een smoothing capacitor/ceramic capacitor*/
@@ -115,7 +120,7 @@ void RightMoveUp()
 
 void MoveBoxes()
 {
-  //NOTE: Make more efficient.
+  //Check left box movement.
   if(leftDown)
   {
     leftBox.MoveDown();
@@ -125,6 +130,7 @@ void MoveBoxes()
     leftBox.MoveUp();
   }
 
+  //Check right box movement.
   if(rightDown)
   {
     rightBox.MoveDown();
@@ -161,9 +167,12 @@ void loop() {
   display.clearDisplay();
   //Check for new movement input for the boxes.
   MoveBoxes();
-  //Redraw and display the boxes.
+  //Move the ball.
+  ball.Move();
+  //Redraw all objects.
   leftBox.Draw();
   rightBox.Draw();
+  ball.Draw();
   display.display();
 }
 
