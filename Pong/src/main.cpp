@@ -8,6 +8,7 @@
 #include "BoxObject.h"
 #include "BallObject.h"
 #include "Location.h"
+#include "GameMaster.h"
 
 //Display pins.
 #define OLED_RESET (4)
@@ -30,7 +31,8 @@ Location ballLocation = (Location){display.width()/2, display.height()/2};
 //Objects.
 BoxObject leftBox = BoxObject(leftBoxLocation, display, BOX_BOX_WIDTH, BOX_BOX_HEIGHT);
 BoxObject rightBox = BoxObject(rightBoxLocation, display, BOX_BOX_WIDTH, BOX_BOX_HEIGHT);
-BallObject ball = BallObject(ballLocation, display, BALL_RADIUS);
+BallObject ball = BallObject(display, BALL_RADIUS);
+GameMaster master = GameMaster(leftBox, rightBox, ball);
 
 /*gooi een capacitor tussen de buttons
 een smoothing capacitor/ceramic capacitor*/
@@ -167,6 +169,8 @@ void loop() {
   display.clearDisplay();
   //Check for new movement input for the boxes.
   MoveBoxes();
+  //Check for collision.
+  master.DetectCollision();
   //Move the ball.
   ball.Move();
   //Redraw all objects.

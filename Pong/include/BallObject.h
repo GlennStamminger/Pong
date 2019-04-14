@@ -20,15 +20,19 @@
 class BallObject : public Object
 {
   public:
-    BallObject(Location location, Adafruit_SH1106& display, int radius);
+    BallObject(Adafruit_SH1106& display, int radius);
     ~BallObject();
 
     void Draw();
     void Move();
+    void Bounce();
     void ScreenBounce();
     int DetectScreenEdgesX();
     int DetectScreenEdgesY();
 
+    int GiveLeftSide();
+    int GiveRightSide();
+    int GiveYpos();
 
   private:
     int radius;

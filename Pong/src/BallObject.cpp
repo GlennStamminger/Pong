@@ -11,9 +11,12 @@
 
 #include "BallObject.h"
 
-BallObject::BallObject(Location location, Adafruit_SH1106& display, int radius)
+BallObject::BallObject(Adafruit_SH1106& display, int radius)
   : Object(location, display), radius(radius)
 {
+  this->location.Xpos = display.width()/2;
+  this->location.Ypos = display.height()/2;
+
   this->velocity.Xpos = BALL_VELOCITY;
   this->velocity.Ypos = BALL_VELOCITY;
 }
@@ -31,11 +34,18 @@ void BallObject::Move()
   this->location += this->velocity;
 }
 
+void BallObject::Bounce()
+{
+  this->velocity.Xpos = -this->velocity.Xpos;
+}
+
 void BallObject::ScreenBounce()
 {
   if((int)this->location.Xpos != DetectScreenEdgesX())
   {
     this->velocity.Xpos = -this->velocity.Xpos;
+    this->location.Xpos = display.width()/2;
+    this->location.Ypos = display.height()/2;
   }
   if((int)this->location.Ypos != DetectScreenEdgesY())
   {
@@ -77,4 +87,19 @@ int BallObject::DetectScreenEdgesY()
   {
     return this->location.Ypos;
   }
+}
+
+int BallObject::GiveLeftSide()
+{
+  return this->location.Xpos - this->radius;
+}
+
+int BallObject::GiveRightSide()
+{
+  return this->location.Xpos + this->radius;
+}
+
+int BallObject::GiveYpos()
+{
+  return this->location.Ypos;
 }

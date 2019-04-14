@@ -39,3 +39,23 @@ void BoxObject::MoveDown()
     this->location.Ypos += BOX_STEP_SIZE;
   }
 }
+
+int BoxObject::GiveUpSide()
+{
+  return this->location.Ypos;
+}
+
+int BoxObject::GiveDownSide()
+{
+  return this->location.Ypos + this->height;
+}
+
+int BoxObject::GiveLeftSide()
+{
+  return this->location.Xpos;
+}
+
+int BoxObject::GiveRightSide()
+{
+  return this->location.Xpos + this->width;
+}

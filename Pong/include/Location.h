@@ -21,6 +21,8 @@ class Location
 	  Location& operator+=(const Location& velocity);
 	  Location operator-(const Location& velocity) const;
 	  Location& operator-=(const Location& velocity);
+    Location operator*(int velocity) const;
+	  Location& operator*=(int velocity);
   public:
     int Xpos;
     int Ypos;

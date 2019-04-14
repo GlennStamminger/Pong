@@ -32,6 +32,11 @@ class BoxObject : public Object
     void MoveUp();
     void MoveDown();
 
+    int GiveUpSide();
+    int GiveDownSide();
+    int GiveLeftSide();
+    int GiveRightSide();
+
   private:
     int height;
     int width;

@@ -38,3 +38,13 @@ Location& Location::operator-=(const Location& velocity)
 {
 	return *this = *this - velocity;
 }
+
+Location Location::operator*(int velocity) const
+{
+	return Location(this->Xpos * velocity, this->Ypos * velocity);
+}
+
+Location& Location::operator*=(int velocity)
+{
+	return *this = *this * velocity;
+}
