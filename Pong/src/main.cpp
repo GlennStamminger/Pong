@@ -168,9 +168,9 @@ void loop() {
   //Check for new movement input for the boxes.
   MoveBoxes();
   //Move the ball.
+  ball.Move();
   ball.DetectLeftBoxContact(leftBox.location.Ypos, leftBox.location.Ypos + leftBox.height, leftBox.location.Xpos + leftBox.width);
   ball.DetectRightBoxContact(rightBox.location.Ypos, rightBox.location.Ypos + rightBox.height, rightBox.location.Xpos);
-  ball.Move();
   //Redraw all objects.
   leftBox.Draw();
   rightBox.Draw();

@@ -88,7 +88,7 @@ void BallObject::DetectLeftBoxContact(int topEdge, int bottomEdge, int sideEdge)
 {
   int leftSide = this->location.Xpos - this->radius;
 
-  if(leftSide <= sideEdge)
+  if(leftSide == sideEdge)
   {
     if(this->location.Ypos >= topEdge && this->location.Ypos <= bottomEdge)
     {
@@ -101,7 +101,7 @@ void BallObject::DetectRightBoxContact(int topEdge, int bottomEdge, int sideEdge
 {
   int rightSide = this->location.Xpos + this->radius;
 
-  if(rightSide >= sideEdge)
+  if(rightSide == sideEdge)
   {
     if(this->location.Ypos >= topEdge && this->location.Ypos <= bottomEdge)
     {
