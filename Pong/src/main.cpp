@@ -32,9 +32,6 @@ BoxObject leftBox = BoxObject(leftBoxLocation, display, BOX_BOX_WIDTH, BOX_BOX_H
 BoxObject rightBox = BoxObject(rightBoxLocation, display, BOX_BOX_WIDTH, BOX_BOX_HEIGHT);
 BallObject ball = BallObject(display, BALL_RADIUS);
 
-/*gooi een capacitor tussen de buttons
-een smoothing capacitor/ceramic capacitor*/
-
 //Box movement bools.
 bool leftDown = false;
 bool leftUp = false;
@@ -177,5 +174,3 @@ void loop() {
   ball.Draw();
   display.display();
 }
-
-
