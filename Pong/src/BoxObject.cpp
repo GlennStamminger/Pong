@@ -19,6 +19,7 @@ BoxObject::BoxObject(Location location, Adafruit_SH1106& display, int width, int
 
 BoxObject::~BoxObject(){}
 
+//Draw the box.
 void BoxObject::Draw()
 {
   if(this->location.Xpos + this->width <= display.width())
@@ -31,16 +32,20 @@ void BoxObject::Draw()
   }
 }
 
+//Move the box up.
 void BoxObject::MoveUp()
 {
+  //Check if the box will not go off screen.
   if(this->location.Ypos > 0)
   {
     this->location.Ypos -= BOX_STEP_SIZE;
   }
 }
 
+//Move the box down.
 void BoxObject::MoveDown()
 {
+  //Check if the box will not go off screen.
   if((this->location.Ypos + this->height) < display.height())
   {
     this->location.Ypos += BOX_STEP_SIZE;

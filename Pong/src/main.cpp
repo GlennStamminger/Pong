@@ -166,11 +166,13 @@ void loop() {
   MoveBoxes();
   //Move the ball.
   ball.Move();
+  //Check for box collision.
   ball.DetectLeftBoxContact(leftBox.location.Ypos, leftBox.location.Ypos + leftBox.height, leftBox.location.Xpos + leftBox.width);
   ball.DetectRightBoxContact(rightBox.location.Ypos, rightBox.location.Ypos + rightBox.height, rightBox.location.Xpos);
   //Redraw all objects.
   leftBox.Draw();
   rightBox.Draw();
   ball.Draw();
+  //Update the screen.
   display.display();
 }
