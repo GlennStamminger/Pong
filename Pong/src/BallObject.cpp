@@ -34,11 +34,6 @@ void BallObject::Move()
   this->location += this->velocity;
 }
 
-void BallObject::Bounce()
-{
-  this->velocity.Xpos = -this->velocity.Xpos;
-}
-
 void BallObject::ScreenBounce()
 {
   if((int)this->location.Xpos != DetectScreenEdgesX())
@@ -89,17 +84,28 @@ int BallObject::DetectScreenEdgesY()
   }
 }
 
-int BallObject::GiveLeftSide()
+void BallObject::DetectLeftBoxContact(int topEdge, int bottomEdge, int sideEdge)
 {
-  return this->location.Xpos - this->radius;
+  int leftSide = this->location.Xpos - this->radius;
+
+  if(leftSide <= sideEdge)
+  {
+    if(this->location.Ypos >= topEdge && this->location.Ypos <= bottomEdge)
+    {
+      this->velocity.Xpos = -this->velocity.Xpos;
+    }
+  }
 }
 
-int BallObject::GiveRightSide()
+void BallObject::DetectRightBoxContact(int topEdge, int bottomEdge, int sideEdge)
 {
-  return this->location.Xpos + this->radius;
-}
+  int rightSide = this->location.Xpos + this->radius;
 
-int BallObject::GiveYpos()
-{
-  return this->location.Ypos;
+  if(rightSide >= sideEdge)
+  {
+    if(this->location.Ypos >= topEdge && this->location.Ypos <= bottomEdge)
+    {
+      this->velocity.Xpos = -this->velocity.Xpos;
+    }
+  }
 }

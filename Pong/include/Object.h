@@ -23,7 +23,7 @@ class Object
 
     virtual void Draw() = 0;
   
-  protected:
+  public:
     Location location;  
     Adafruit_SH1106& display;
 };

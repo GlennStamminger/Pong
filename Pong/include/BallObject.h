@@ -25,14 +25,11 @@ class BallObject : public Object
 
     void Draw();
     void Move();
-    void Bounce();
     void ScreenBounce();
     int DetectScreenEdgesX();
     int DetectScreenEdgesY();
-
-    int GiveLeftSide();
-    int GiveRightSide();
-    int GiveYpos();
+    void DetectLeftBoxContact(int topEdge, int bottomEdge, int sideEdge);
+    void DetectRightBoxContact(int topEdge, int bottomEdge, int sideEdge);
 
   private:
     int radius;
