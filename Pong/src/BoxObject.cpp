@@ -21,7 +21,14 @@ BoxObject::~BoxObject(){}
 
 void BoxObject::Draw()
 {
-  this->display.fillRect(this->location.Xpos, this->location.Ypos, this->width, this->height, WHITE);
+  if(this->location.Xpos + this->width <= display.width())
+  {
+    this->display.fillRect(this->location.Xpos, this->location.Ypos, this->width, this->height, WHITE);
+  }
+  else
+  {
+    this->display.fillRect(display.width() - this->width, this->location.Ypos, this->width, this->height, WHITE);
+  }
 }
 
 void BoxObject::MoveUp()
